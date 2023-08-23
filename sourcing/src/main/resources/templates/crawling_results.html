@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Crawling Results</title>
+</head>
+<body>
+    <h1>Crawling Results</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Link</th>
+                <th>Image</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="result : ${crawlingResults}">
+                <td th:text="${result.title}"></td>
+                <td>
+                    <a th:href="${result.link}" th:text="${result.link}" target="_blank"></a>
+                </td>
+                <td>
+                    <img th:src="${result.imageUrl}" alt="Product Image">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

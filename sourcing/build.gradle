@@ -16,9 +16,12 @@ repositories {
 }
 
 dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.jsoup:jsoup:1.14.3'
+	implementation 'org.seleniumhq.selenium:selenium-java:4.8.3'
+    implementation 'org.seleniumhq.selenium:selenium-chrome-driver:4.8.3'
 }
 
 tasks.named('test') {
