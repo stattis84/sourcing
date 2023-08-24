@@ -5,6 +5,8 @@ public class CrawlingResult {
 	private String title;
     private String link;
     private String imageUrl;
+    private String price;
+    private String payCount;
     
 	public String getTitle() {
 		return title;
@@ -24,7 +26,17 @@ public class CrawlingResult {
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
 	}
+	public String getPrice() {
+		return price;
+	}
+	public void setPrice(String price) {
+		this.price = price;
+	}
+	public String getPayCount() {
+		return payCount;
+	}
+	public void setPayCount(String payCount) {
+		this.payCount = payCount;
+	}
 	
-    
-    
 }

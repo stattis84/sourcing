@@ -2,6 +2,7 @@ package com.sourcing.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.jsoup.Jsoup;
@@ -9,6 +10,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -93,9 +95,27 @@ public class CommonController {
             
             System.out.println("driver : " + driver.toString());
             
+            /*
+            var stTime = new Date().getTime(); //현재시간
+            var scrollSize = 0;
+            while (new Date().getTime() < stTime + 10000) { //30초 동안 무한스크롤 지속
+                Thread.sleep(500); //리소스 초과 방지
+                //executeScript: 해당 페이지에 JavaScript 명령을 보내는 거
+                ((JavascriptExecutor)driver).executeScript("window.scrollTo(" + scrollSize + ", " + scrollSize + 300 + ")", driver.findElement(By.cssSelector("div.section__module-wrap")));
+                
+                scrollSize += 300;
+                
+            }
+            */
+            
             List<WebElement> products = driver.findElements(By.cssSelector("div.box__component-itemcard"));
-
+            
+            int scrollSize = 0;
             for (WebElement product : products) {
+            	
+            	((JavascriptExecutor)driver).executeScript("window.scrollTo(" + scrollSize + ", " + scrollSize + 10 + ")", product);
+            	
+            	scrollSize += 10;
             	
             	try {
             		
@@ -109,11 +129,15 @@ public class CommonController {
                         String title = product.findElement(By.cssSelector("div.box__item-title > span.text__item-title > a > span.text__item")).getText();
                         String link = product.findElement(By.cssSelector("a.link__item")).getAttribute("href");
                         String imageUrl = product.findElement(By.cssSelector("div.box__image > a > img")).getAttribute("src");
-
+                        String price = product.findElement(By.cssSelector("div.box__item-price > div.box__price-seller > strong.text__value")).getText();
+                        String payCount = product.findElement(By.cssSelector(".list-item__pay-count > span.text")).getText().replace("구매 ", "");
+                        
                         CrawlingResult result = new CrawlingResult();
                         result.setTitle(title);
                         result.setLink(link);
                         result.setImageUrl(imageUrl);
+                        result.setPrice(price);
+                        result.setPayCount(payCount);
 
                         crawlingResults.add(result);
                     }
